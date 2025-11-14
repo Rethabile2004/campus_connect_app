@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:githubproject13/viewmodels/user_view_model.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -14,41 +16,45 @@ class ProfileScreen extends StatelessWidget {
             children: [
 
               // Header Section
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(24),
-                color: Colors.indigo,
-                child: Column(
-                  children: [
-                    CircleAvatar(
-                      radius: 45,
-                      backgroundImage: AssetImage('assets/profile.png'),
+              Consumer<UserViewModel>(
+                builder: (context,user,child) {
+                  return Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(24),
+                    color: Colors.indigo,
+                    child: Column(
+                      children: [
+                        CircleAvatar(
+                          radius: 45,
+                          backgroundImage: AssetImage(user.avatarUrl),
+                        ),
+                        const SizedBox(height: 12),
+                        Text(
+                          user.name,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          user.bio,
+                          style: TextStyle(
+                            color: Colors.white70,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          user.id,
+                          style: TextStyle(
+                            color: Colors.white70,
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 12),
-                    const Text(
-                      "Eric Johnson",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    const Text(
-                      "Final Year IT Student",
-                      style: TextStyle(
-                        color: Colors.white70,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    const Text(
-                      "Student ID: 20214587",
-                      style: TextStyle(
-                        color: Colors.white70,
-                      ),
-                    ),
-                  ],
-                ),
+                  );
+                }
               ),
 
               const SizedBox(height: 20),
